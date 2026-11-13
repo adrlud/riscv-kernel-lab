@@ -5,5 +5,5 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
   build-essential bc bison flex libssl-dev libelf-dev libncurses-dev \
   gcc-riscv64-linux-gnu libc6-dev-riscv64-cross \
-  qemu-system-misc opensbi cpio git ca-certificates gdb-multiarch
+  qemu-system-misc opensbi cpio git ca-certificates gdb-multiarch python3
 echo "Klart. Kör: ./scripts/build-kernel.sh && ./scripts/build-rootfs.sh && ./scripts/run.sh"
