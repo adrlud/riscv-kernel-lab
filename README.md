@@ -22,6 +22,18 @@ Avsluta QEMU med `poweroff -f`.
 2. `./scripts/build-kernel.sh` (bygger bara om det ändrade).
 3. `./scripts/run.sh` och leta efter din rad i loggen.
 
+## Egna moduler
+
+Lägg varje modul i en egen mapp under `modules/` (källfil + `Makefile` med `obj-m := namn.o`). Sedan:
+
+```
+./scripts/go.sh       # bygger alla moduler, packar om rotfilsystemet och bootar
+./scripts/go.sh -k    # bygger även om kärnan först
+./scripts/go.sh -n    # bygger och packar, men bootar inte
+```
+
+Modulerna hamnar i `/lib/modules/` i den bootade kärnan.
+
 ## Felsöka med gdb
 
 ```
