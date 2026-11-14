@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Bygger alla moduler i modules/, packar om rotfilsystemet och bootar i QEMU.
+# Bygger alla moduler i modules/ och alla program i userspace/,
+# packar om rotfilsystemet och bootar i QEMU.
 #   ./scripts/go.sh        moduler + packa + boota
 #   ./scripts/go.sh -k     bygg även om kärnan först
 #   ./scripts/go.sh -n     bygg och packa, men boota inte
@@ -36,6 +37,12 @@ for dir in modules/*/; do
   echo "== Bygger modul: $name"
   make -s -C linux M="$PWD/modules/$name" modules
   cp "$dir"*.ko rootfs/lib/modules/
+done
+
+for src in userspace/*.c; do
+  name=$(basename "$src" .c)
+  echo "== Bygger program: $name"
+  ${CROSS_COMPILE}gcc -static -O2 -Wall -o "rootfs/bin/$name" "$src"
 done
 
 (cd rootfs && find . | cpio -o -H newc 2>/dev/null | gzip > ../initramfs.cpio.gz)

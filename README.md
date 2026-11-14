@@ -34,6 +34,8 @@ Lägg varje modul i en egen mapp under `modules/` (källfil + `Makefile` med `ob
 
 Modulerna hamnar i `/lib/modules/` i den bootade kärnan.
 
+Vanliga program (userspace) läggs som `.c`-filer i `userspace/`. `go.sh` bygger dem statiskt och lägger dem i `/bin/`, så `userspace/satp.c` körs med kommandot `satp`.
+
 ## Felsöka med gdb
 
 ```
